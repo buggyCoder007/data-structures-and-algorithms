@@ -15,6 +15,9 @@ class Node {
  *  After inserting the node it updates the tail to new node and increments the length by 1.
  * @function {pop} this method enables the user to pop/remove a node from a given linked list.The removal happens from the end
  *  After removing the node it updates the tail to seocnd last node and decrement the length by 1.
+ * @function {shift} this method enables the user to pop/remove/delete the a node from a given linked list.The removal happens from the start
+ * fo the list instead of end. After removing the node it updates the head to seocnd node from the head as new head
+ *  and decrement the length by 1.
  */
 
 class SinglyLinkedList {
@@ -51,6 +54,15 @@ class SinglyLinkedList {
     if (this.length === 0) this.head = this.tail = null;
     return currentNode;
   }
+
+  shift() {
+    if (!this.head) return undefined;
+    let currentHead = this.head;
+    this.head = currentHead.next;
+    this.length--;
+    if (this.length === 0) this.tail = null;
+    return currentHead;
+  }
 }
 
 const list = new SinglyLinkedList();
@@ -65,6 +77,9 @@ list.pop();
 list.pop();
 list.pop();
 list.pop();
-
+list.shift();
+list.shift();
+list.shift();
+list.shift();
 
 console.log(JSON.stringify(list));
