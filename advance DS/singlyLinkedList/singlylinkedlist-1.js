@@ -75,9 +75,27 @@ class SinglyLinkedList {
     let currentHead = this.head;
     this.head = newNode;
     this.head.next = currentHead;
-    if ((this.length === 0)) this.tail = this.head;
+    if (this.length === 0) this.tail = this.head;
     this.length++;
     return this;
+  }
+
+  get(nodeIndex) {
+    if (
+      nodeIndex > this.length ||
+      typeof nodeIndex !== "number" ||
+      nodeIndex < 0
+    )
+      return "NOT FOUND";
+    let counter = 0;
+    let currentNode = this.head;
+    while (currentNode) {
+      if (counter === nodeIndex) {
+        return currentNode;
+      }
+      currentNode = currentNode.next;
+      counter++;
+    }
   }
 }
 
@@ -100,3 +118,5 @@ list.shift();
 list.unshift("Hello");
 
 console.log(JSON.stringify(list));
+
+console.log(list.get(2));
