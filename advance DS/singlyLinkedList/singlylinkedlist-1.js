@@ -24,6 +24,9 @@ class Node {
  *
  * @function {unshift} this method enables the user to push/insert to a linked list.The insert happens from the start
  *  After inserting the node it updates the head to new node and increments the length by 1.
+ * 
+ * @function {get} this methods gets the node value based on the index passed to the function. It uses a counter
+ * and iterates through the whole list since liskd list does not have the indexes.
  */
 
 class SinglyLinkedList {
