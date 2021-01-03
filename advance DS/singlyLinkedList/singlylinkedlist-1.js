@@ -11,13 +11,19 @@ class Node {
 }
 /***
  * @name {SinglyLinkedList}
+ *
  * @function {push} this method enables the user to push/insert to a linked list.The insert happens from the end
  *  After inserting the node it updates the tail to new node and increments the length by 1.
+ *
  * @function {pop} this method enables the user to pop/remove a node from a given linked list.The removal happens from the end
  *  After removing the node it updates the tail to seocnd last node and decrement the length by 1.
+ *
  * @function {shift} this method enables the user to pop/remove/delete the a node from a given linked list.The removal happens from the start
  * fo the list instead of end. After removing the node it updates the head to seocnd node from the head as new head
  *  and decrement the length by 1.
+ *
+ * @function {unshift} this method enables the user to push/insert to a linked list.The insert happens from the start
+ *  After inserting the node it updates the head to new node and increments the length by 1.
  */
 
 class SinglyLinkedList {
@@ -63,6 +69,16 @@ class SinglyLinkedList {
     if (this.length === 0) this.tail = null;
     return currentHead;
   }
+
+  unshift(val) {
+    let newNode = new Node(val);
+    let currentHead = this.head;
+    this.head = newNode;
+    this.head.next = currentHead;
+    if ((this.length === 0)) this.tail = this.head;
+    this.length++;
+    return this;
+  }
 }
 
 const list = new SinglyLinkedList();
@@ -81,5 +97,6 @@ list.shift();
 list.shift();
 list.shift();
 list.shift();
+list.unshift("Hello");
 
 console.log(JSON.stringify(list));
