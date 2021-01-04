@@ -27,9 +27,13 @@ class Node {
  *
  * @function {get} this methods gets the node value based on the index passed to the function. It uses a counter
  * and iterates through the whole list since liskd list does not have the indexes.\
- * 
+ *
  * @function {set} this methods sets the node value based on the value and index passed to the function. It iterates through the whole
  * list since linked list does not have the indexes, gets that node and over writes the value for the same.
+ *
+ * @function {insert} this methods inserts/add the node value based on the index passed to the function.
+ * 
+ * @function {remove} this methods removes/subtracts the node value based on the index passed to the function.
  */
 
 class SinglyLinkedList {
@@ -105,37 +109,87 @@ class SinglyLinkedList {
   }
 
   set(nodeVal, nodeIndex) {
-    let currentNode = list.get(nodeIndex);
+    let currentNode = this.get(nodeIndex);
     if (currentNode) {
       currentNode.val = nodeVal;
       return true;
     }
     return false;
   }
+
+  insert(nodeVal, nodeIndex) {
+    if (nodeIndex < 0 || nodeIndex > this.length) {
+      return "REQUEST NOT VALID";
+    }
+    this.length++;
+    if (nodeIndex == 0) {
+      this.unshift(nodeVal);
+      return this;
+    }
+    if (nodeIndex == this.length) {
+      this.push(nodeVal);
+      return this;
+    }
+    let nextNode = this.get(nodeIndex);
+    let prevNode = this.get(nodeIndex - 1);
+    let currentNode = new Node(nodeVal);
+    prevNode.next = currentNode;
+    currentNode.next = nextNode;
+    return this;
+  }
+
+  remove(nodeIndex) {
+    if (nodeIndex < 0 || nodeIndex > this.length) {
+      return "REQUEST NOT VALID";
+    }
+    this.length--;
+    if (nodeIndex == 0) {
+      this.shift(nodeVal);
+      return this;
+    }
+    if (nodeIndex == this.length) {
+      this.pop(nodeVal);
+      return this;
+    }
+    let currentNode = this.get(nodeIndex);
+    let prevNode = this.get(nodeIndex - 1);
+    prevNode.next = currentNode.next;
+    return this;
+  }
 }
 
 const list = new SinglyLinkedList();
-list.push("hi");
-list.push("there");
-list.push("Hey");
-list.push("rosh");
-list.pop();
-list.pop();
-list.pop();
-list.pop();
-list.pop();
-list.pop();
-list.pop();
-list.shift();
-list.shift();
-list.shift();
-list.shift();
-list.unshift("Hello");
 
-console.log(JSON.stringify(list));
+// ways to test the above code
+// list.push("hi");
+// list.push("there");
+// list.push("Hey");
+// list.push("rosh");
+// list.pop();
+// list.pop();
+// list.pop();
+// list.pop();
+// list.pop();
+// list.pop();
+// list.pop();
+// list.shift();
+// list.shift();
+// list.shift();
+// list.shift();
+// list.unshift("Hello");
 
-console.log(list.get(2));
+// console.log(JSON.stringify(list));
 
-console.log(list.set("XYZ", 3));
+// console.log(list.get(2));
 
-console.log(JSON.stringify(list));
+// console.log(list.set("XYZ", 3));
+
+// console.log(JSON.stringify(list));
+
+// console.log("lsit1111 >>>", JSON.stringify(list));
+
+// let abc = list.insert("Madam!!!", 2);
+// let abc =  list.remove(2)
+// console.log("abc>>>>>>", abc);
+
+// console.log("lsit2222 >>>", JSON.stringify(list));
