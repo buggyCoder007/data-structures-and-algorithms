@@ -24,9 +24,12 @@ class Node {
  *
  * @function {unshift} this method enables the user to push/insert to a linked list.The insert happens from the start
  *  After inserting the node it updates the head to new node and increments the length by 1.
- * 
+ *
  * @function {get} this methods gets the node value based on the index passed to the function. It uses a counter
- * and iterates through the whole list since liskd list does not have the indexes.
+ * and iterates through the whole list since liskd list does not have the indexes.\
+ * 
+ * @function {set} this methods sets the node value based on the value and index passed to the function. It iterates through the whole
+ * list since linked list does not have the indexes, gets that node and over writes the value for the same.
  */
 
 class SinglyLinkedList {
@@ -89,7 +92,7 @@ class SinglyLinkedList {
       typeof nodeIndex !== "number" ||
       nodeIndex < 0
     )
-      return "NOT FOUND";
+      return null;
     let counter = 0;
     let currentNode = this.head;
     while (currentNode) {
@@ -99,6 +102,15 @@ class SinglyLinkedList {
       currentNode = currentNode.next;
       counter++;
     }
+  }
+
+  set(nodeVal, nodeIndex) {
+    let currentNode = list.get(nodeIndex);
+    if (currentNode) {
+      currentNode.val = nodeVal;
+      return true;
+    }
+    return false;
   }
 }
 
@@ -123,3 +135,7 @@ list.unshift("Hello");
 console.log(JSON.stringify(list));
 
 console.log(list.get(2));
+
+console.log(list.set("XYZ", 3));
+
+console.log(JSON.stringify(list));
